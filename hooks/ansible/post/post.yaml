@@ -209,6 +209,8 @@
               ip route add default via {{ ansible_default_ipv4.gateway }} dev eth0 table mgmt_rt
               ip rule add from {{ ansible_default_ipv4.address }}/32 table mgmt_rt
               ip rule add to {{ ansible_default_ipv4.address }}/32 table mgmt_rt
+              echo 2 > /proc/sys/net/ipv4/conf/default/rp_filter
+              echo 2 > /proc/sys/net/ipv4/conf/all/rp_filter
             fi
           dest: /sbin/ifup-local
           mode: a+x
